@@ -1,0 +1,51 @@
+<form #f="ngForm" *ngIf="auth.user.email_Verified" (ngSubmit)="submit()" novalidate>
+  <p>
+    {{ product | json }}
+  </p><toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+    <label for="name" class="control-label">Product name</label>   
+    <br> 
+        <input matInput placeholder="Enter your product name." minlength="2" maxlength="256"  name="name" required #name="ngModel" [(ngModel)]="product.name">
+      <br>
+    <label for="category">Category</label>
+    <br>
+        <select placeholder="Please select category.." [(ngModel)]="product.categoryId" name="categoryId" required #category="ngModel">
+          <option *ngFor="let c of categories" [value]="c.id">
+            {{ c.name }}
+          </option>
+        </select>
+    <br>
+    <label for="platform">Platform</label>
+    <br>   
+        <select placeholder="Please select platform.." [(ngModel)]="product.platformId" name="platformId" required #platform="ngModel">
+          <option *ngFor="let p of platforms" [value]="p.id">
+            {{ p.name }}   
+          </option>
+        </select>
+    <br>
+    <label>Do you want sell or buy this product?</label>
+    <br>
+        <select placeholder="Please choose one.." [(ngModel)]="product.sellOrBuy" name="sellOrBuy" required #sellOrBuy="ngModel">
+          <option value="Sell">Sell</option>
+          <option value="Buy">Buy</option>  
+        </select>
+    <br>
+    <label for="name" class="control-label">Age limit of your product</label>   
+    <br> 
+        <input id="ageLimit" matInput placeholder="Enter age limit." required min="3" max="18" [(ngModel)]="product.ageLimit" name="ageLimit"  type="number" #ageLimit="ngModel">
+    <br>
+    <label for="description" class="control-label">Description</label>
+    <br>
+        <textarea name="description" required maxlength="500" [(ngModel)]="product.description" #description="ngModel" matInput placeholder="Add description of your product"></textarea>
+    <br>
+    <label for="price" class="control-label">Price</label>   
+    <br> 
+        <input id="price" matInput placeholder="Enter price." required [(ngModel)]="product.price" name="price"  type="number" #price="ngModel">
+    <br>
+        <input placeholder="Input disabled" [(ngModel)]="product.releaseDate" name="releaseDate" #releaseDate="ngModel" disabled>
+      <br>
+  <button [disabled]="!f.valid">Save</button>
+</form>
+
+<div  *ngIf="!auth.user.email_Verified">
+  <h1>Please verify your email address.</h1>
+</div>

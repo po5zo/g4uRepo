@@ -1,0 +1,37 @@
+<h1>Product</h1>
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Product</a></li>
+    <li role="presentation"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" *ngIf="product">
+    <!-- Vehicle tab -->
+    <div role="tabpanel" class="tab-panel active" id="basic">
+      <h2>Basics</h2>
+      <ul>
+            <li>Product name: {{ product.name }}</li>
+            <li>Price: {{ product.price }}</li>
+            <li>Sell Or Buy: {{ product.sellOrBuy }}
+            <li>Release Date: {{ product.releaseDate }}</li>
+            <li>Description: {{ product.description}}</li>
+            <li>Age Limit: {{ product.ageLimit }}</li>
+            <li>Category: {{ category.name }}</li>
+            <li>Platform: {{ platform.name }}</li>
+            <li *ngFor="let u of user.items">User: {{ u.email }}</li>
+        </ul>
+      <br/>
+      <p>
+        <a *ngIf="auth.user.roles == 'admin' || auth.user.authSub == product.authSub" class="btn btn-primary" [routerLink]="['/products/edit/', product.id]">Edit</a>
+        <button *ngIf="auth.user.roles == 'admin' || auth.user.authSub == product.authSub" class="btn btn-danger" (click)="delete()">Delete</button>
+        <a class="btn btn-default" [routerLink]="['/products']">View All Products</a>
+      </p>
+    </div>
+    <!-- Photos tab -->
+    <div role="tabpanel" class="tab-panel" id="photos">
+      <h2>Photos</h2>
+    </div>
+  </div>
+</div>
